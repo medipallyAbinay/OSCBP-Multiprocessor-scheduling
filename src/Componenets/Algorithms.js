@@ -17,7 +17,7 @@ function Algorithms(props) {
     let i=0,zidx=100000;
     let PriorityArray=tarray.map((element,index)=>{
         if(i<tbt){
-            i+=element.bt;
+            i+=element.BT;
             zidx=index;
             return element;
         }
@@ -28,7 +28,7 @@ function Algorithms(props) {
     let FcfsArray=tarray.map((element,index)=>{
         if(index<=zidx) return;
         if(i<=tbt){
-            i+=element.bt;
+            i+=element.BT;
             tzidx=index;
             return element;
         }
