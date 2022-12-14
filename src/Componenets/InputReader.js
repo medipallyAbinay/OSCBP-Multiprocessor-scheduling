@@ -11,7 +11,7 @@ const [tempNum, setTempNum] = useState('')
 const [numberofP, setnumberofP] = useState()
 const [allProcesses,setAllprocess]=useState([])
 const [state,setState]=useState(true);
-
+const [totalP,setTotalP]=useState([])
 const handleSubmit=()=>{
     setnumberofP( numberofP-1);
     let obj={
@@ -26,7 +26,9 @@ const handleSubmit=()=>{
     let temp=allProcesses
     temp.push(obj)
     setAllprocess(temp)
-    if(numberofP==0) setState(false) 
+    if(numberofP==1) {  setState(false)
+        console.log(state)
+    }
     setPid('')
     setAt('')
     setBt('')
@@ -35,7 +37,12 @@ const handleSubmit=()=>{
 
 const getNumberOfProcesses=()=>{
     setnumberofP(+(tempNum))
-  
+    let temp=[]
+    for(let i=1;i<=tempNum;i++) {
+        temp=totalP
+        temp.push(i);
+        setTotalP(temp);
+    }  
 }
 
   return (
@@ -51,25 +58,28 @@ const getNumberOfProcesses=()=>{
             <button className="btn btn-success rounded" onClick={getNumberOfProcesses} > submit </button>
         </div>
         {numberofP>0 && 
-        <div className="row">
+        totalP.map((element,index)=>{
+            return(
+                <>
+                <div className="row">
             <div className="col-sm-10">
             <form  className="form"  >
                 <div className="row">
                     <div className="col-sm-3">
                         <label htmlFor="pid" className="form-label">Process Id</label>
-                        <input type="text" name="pid" id="pid" className="form-control" onChange={(e)=>setPid(e.target.value)} value={pid}  />
+                        <input type="text" name="pid" id="pid" className="form-control" onChange={(e)=>setPid(e.target.value)} />
                     </div>
                     <div className="col-sm-3">
                         <label htmlFor="at" className="form-label">Arrival Time</label>
-                        <input type="text" name="at" id="at" className="form-control" onChange={(e)=>{setAt(e.target.value)}} value={at} />
+                        <input type="text" name="at" id="at" className="form-control" onChange={(e)=>{setAt(e.target.value)}}  />
                     </div>
                     <div className="col-sm-3">
                         <label htmlFor="bt" className="form-label">Burst Time</label>
-                        <input type="text" name="bt" id="bt" className="form-control" onChange={(e)=>{setBt(e.target.value)}} value={bt} />
+                        <input type="text" name="bt" id="bt" className="form-control" onChange={(e)=>{setBt(e.target.value)}} />
                     </div>
                     <div className="col-sm-3">
                         <label htmlFor="priority" className="form-label">priority</label>
-                        <input type="text" name="priority" id="priority" className="form-control" onChange={(e)=>{setPriority(e.target.value)}} value={priority} />
+                        <input type="text" name="priority" id="priority" className="form-control" onChange={(e)=>{setPriority(e.target.value)}} />
                     </div>
                 </div>
             </form>
@@ -78,6 +88,10 @@ const getNumberOfProcesses=()=>{
                 <button className="btn btn-success rounded mt-4" onClick={handleSubmit} >Submit</button>
             </div>
         </div>
+                </>
+            )
+        })
+       
         }
         </> }
         {
